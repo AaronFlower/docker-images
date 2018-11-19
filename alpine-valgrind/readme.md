@@ -1,6 +1,6 @@
 ## Alpine for Valgrind
 
-Valgrind always updates behinde the mac os, so we can use docker to run valgrind.
+Valgrind always updates behind the mac os, so we can use docker to run valgrind.
 
 ## Build
 
