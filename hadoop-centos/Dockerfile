@@ -7,17 +7,16 @@ MAINTAINER SequenceIQ
 
 USER root
 
-# update aliyun source
-RUN curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+# update 163 source
+RUN curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS6-Base-163.repo 
 # RUN yum makecache
 # install dev tools
 RUN yum clean all; \
     rpm --rebuilddb; \
     yum install -y curl which tar sudo openssh-server openssh-clients rsync
 # update libselinux. see https://github.com/sequenceiq/hadoop-docker/issues/14
-RUN yum clean all; yum update -y libselinux; yum clean all
-RUN yum install -y yum-plugin-ovl
-RUN yum clean all
+RUN rpm --rebuilddb; yum install -y yum-plugin-ovl; yum clean all;
+RUN rpm --rebuilddb; yum update -y libselinux; yum clean all;
 
 # passwordless ssh
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
@@ -27,9 +26,9 @@ RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 
 # java
-RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-linux-x64.rpm' -H 'Cookie: oraclelicense=accept-securebackup-cookie'
-RUN rpm -i jdk-7u71-linux-x64.rpm
-RUN rm jdk-7u71-linux-x64.rpm
+RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.rpm'
+RUN rpm -i jdk-8u181-linux-x64.rpm
+RUN rm jdk-8u181-linux-x64.rpm
 
 ENV JAVA_HOME /usr/java/default
 ENV PATH $PATH:$JAVA_HOME/bin
