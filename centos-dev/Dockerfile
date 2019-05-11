@@ -49,5 +49,8 @@ RUN cd ~/.vim/plugged/YouCompleteMe && git submodule update --init --recursive
 RUN echo "update55:" && mkdir -p ~/.vim/plugged/YouCompleteMe/third_party/ycmd/clang_archives;
 COPY libclang-7.0.0-x86_64-unknown-linux-gnu.tar.bz2 /root/.vim/plugged/YouCompleteMe/third_party/ycmd/clang_archives/
 RUN cd ~/.vim/plugged/YouCompleteMe && python3 install.py --clang-completer
-RUN yum install -y valgrind tmux && git clone https://github.com/gpakosz/.tmux.git && ln -s -f ./.tmux/.tmux.conf ~/.tmux.conf && git clone https://github.com/AaronFlower/dotfiles.git && ln -s -f ./dotfiles/tmux.conf.local ~/.tmux.conf.local && gem install rouge
+RUN yum install -y valgrind tmux && cd ~ && git clone https://github.com/gpakosz/.tmux.git && git clone https://github.com/AaronFlower/dotfiles.git && ln -s -f ~/dotfiles/tmux.conf.local ~/.tmux.conf.local && gem install rouge
+
+RUN sed -i '/tsflags=nodocs/d' /etc/yum.conf && yum install -y man-pages man-db man
+
 CMD ["/bin/zsh"]

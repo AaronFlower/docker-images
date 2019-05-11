@@ -35,6 +35,13 @@ yum install the_silver_searcher
 - vim : 支持 python3 需要自己编译
 - ctags: yum install ctags-etags
 
+## 安装 man
+
+默认的 centos Docker 镜像有 `tsflags=nodocs` 这个配置，我需要把 `/etc/yum.conf` 中这个配置给删除或注释掉之后再安装.
+
+```
+sed -i '/tsflags=nodocs/d' /etc/yum.conf && yum install -y man-pages man-db man
+```
 ## Build
 
 ```
