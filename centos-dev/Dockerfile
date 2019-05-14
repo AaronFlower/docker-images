@@ -52,5 +52,6 @@ RUN cd ~/.vim/plugged/YouCompleteMe && python3 install.py --clang-completer
 RUN yum install -y valgrind tmux && cd ~ && git clone https://github.com/gpakosz/.tmux.git && git clone https://github.com/AaronFlower/dotfiles.git && ln -s -f ~/dotfiles/tmux.conf.local ~/.tmux.conf.local && gem install rouge
 
 RUN sed -i '/tsflags=nodocs/d' /etc/yum.conf && yum install -y man-pages man-db man
+COPY init.sh /init.sh
 
-CMD ["/bin/zsh"]
+CMD ["/init.sh"]
